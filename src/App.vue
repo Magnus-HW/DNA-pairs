@@ -1,9 +1,9 @@
 <script setup>
-import DNAinput from "./components/DNAinput.vue";
+import ComplementarySqnce from "./components/ComplementarySqnce.vue";
 </script>
 
 <template>
-  <DNAinput />
+  <ComplementarySqnce />
 </template>
 
 <style scoped></style>

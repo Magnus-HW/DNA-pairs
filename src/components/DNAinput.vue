@@ -1,24 +1,8 @@
 <script setup>
-import { ref, computed } from "vue";
-const pairs = {
-  A: "T",
-  G: "C",
-  T: "A",
-  C: "G",
-};
-const dna = ref("");
-
-const complSequence = computed(() => {
-  let res = "";
-  for (let char of dna.value) {
-    res = res.concat(pairs[char]);
-  }
-  console.log(res);
-  return res;
-});
+defineProps(["modelValue"]);
+const emit = defineEmits(["update:modelValue"]);
 
 function inputValidation(event) {
-  // console.log(event.target.selectionStart);
   if (
     event.keyCode == 97 ||
     event.keyCode == 65 ||
@@ -30,29 +14,26 @@ function inputValidation(event) {
     event.keyCode == 99
   ) {
     console.log(event.keyCode);
+    emit("update:modelValue", event.target.value);
     return true;
   }
-  //String.fromCharCode(0);
   return event.preventDefault();
-}
+};
 </script>
 
 <template>
-  <div class="dna-input">
-    <form>
-      <input
-        v-model="dna"
-        type="text"
-        name="dna"
-        id="dna"
-        @keypress="inputValidation($event)"
-        @input="dna = dna.toUpperCase()"
-      />
-    </form>
-    <div>{{ dna }}</div>
-    <div class="pairs">{{ complSequence }}</div>
-    <div class="temperatuce"></div>
-  </div>
+  <form>
+    <input
+      :value="modelValue"
+      type="text"
+      name="dna"
+      id="dna"
+      maxlength="100"
+      @keypress="inputValidation($event)"
+      @input="$event.target.value = $event.target.value.toUpperCase()"
+    />
+  </form>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>
