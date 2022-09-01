@@ -1,9 +1,24 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+const pairs = {
+  A: "T",
+  G: "C",
+  T: "A",
+  C: "G",
+};
 const dna = ref("");
+
+const complSequence = computed(() => {
+  let res = "";
+  for (let char of dna.value) {
+    res = res.concat(pairs[char]);
+  }
+  console.log(res);
+  return res;
+});
+
 function inputValidation(event) {
   // console.log(event.target.selectionStart);
-  // console.log(event.keyCode);
   if (
     event.keyCode == 97 ||
     event.keyCode == 65 ||
@@ -15,8 +30,9 @@ function inputValidation(event) {
     event.keyCode == 99
   ) {
     console.log(event.keyCode);
-    return String.fromCharCode(0);
+    return true;
   }
+  //String.fromCharCode(0);
   return event.preventDefault();
 }
 </script>
@@ -29,12 +45,12 @@ function inputValidation(event) {
         type="text"
         name="dna"
         id="dna"
-        style="text-transform: uppercase"
         @keypress="inputValidation($event)"
+        @input="dna = dna.toUpperCase()"
       />
     </form>
     <div>{{ dna }}</div>
-    <div class="pairs"></div>
+    <div class="pairs">{{ complSequence }}</div>
     <div class="temperatuce"></div>
   </div>
 </template>
