@@ -26,27 +26,20 @@ const props = defineProps({
 });
 
 const temperature = computed(() => {
-  return props.dnaLength <= 13
-    ? tempDnalengthLess13(
-        props.nucls.A,
-        props.nucls.T,
-        props.nucls.G,
-        props.nucls.C
-      )
-    : tempDnalengthMore13(
-        props.nucls.A,
-        props.nucls.T,
-        props.nucls.G,
-        props.nucls.C
-      );
+  return props.dnaLength < 13
+    ? tempDnalengthLess13(props.nucls)
+    : tempDnalengthMore13(props.nucls);
 });
 
-function tempDnalengthLess13(A, G, T, C) {
-  return (2 * (A + T) + 4 * (G + C)).toFixed(3);
+function tempDnalengthLess13(nucls) {
+  return (2 * (nucls.A + nucls.T) + 4 * (nucls.G + nucls.C)).toFixed(3);
 }
 
-function tempDnalengthMore13(A, G, T, C) {
-  return (64.9 + (41 * (G + C - 16.4)) / (A + T + G + C)).toFixed(3);
+function tempDnalengthMore13(nucls) {
+  return (
+    64.9 +
+    (41 * (nucls.G + nucls.C - 16.4)) / (nucls.A + nucls.T + nucls.G + nucls.C)
+  ).toFixed(3);
 }
 </script>
 
