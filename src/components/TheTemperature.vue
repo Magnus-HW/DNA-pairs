@@ -26,7 +26,6 @@ const props = defineProps({
 });
 
 const temperature = computed(() => {
-  console.log(Object.values(props.nucls));
   return props.dnaLength <= 13
     ? tempDnalengthLess13(
         props.nucls.A,
