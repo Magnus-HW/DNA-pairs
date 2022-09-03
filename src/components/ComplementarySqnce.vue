@@ -40,9 +40,9 @@ watch(dna, () => {
   <div class="dna-input">
     <DNAInput v-model="dna" />
     <div class="sequence">
-      <div v-for="(letter, index) in dna" :key="index" class="pair"> 
-          <div class="dna-nucl">{{dna[index]}}</div>
-          <div class="comp-dna-nucl">{{complSequence[index]}}</div>
+      <div v-for="(letter, index) in dna" :key="index" class="pair">
+        <div class="dna-nucl">{{ dna[index] }}</div>
+        <div class="comp-dna-nucl">{{ complSequence[index] }}</div>
       </div>
     </div>
     <TheTemperature :nucls="nucls" :dnaLength="dna.length" />
@@ -71,9 +71,4 @@ watch(dna, () => {
   left: 35%;
   top: 95%;
 }
-
-.complementary-sequence {
-  letter-spacing: 7px;
-}
-
 </style>
